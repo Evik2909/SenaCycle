@@ -1,106 +1,111 @@
 <?php
-class Mpag
-{
+ class Mpag{
+    //Atributos
     private $idpag;
     private $nompag;
     private $rutpag;
+    private $icopag;
     private $ordpag;
-
-    //Get Methods
-    public function getIdpag()
-    {
-        return $this->idpag;
+    //Metodos get
+    public function getIdpag(){
+        return $this -> idpag;
     }
-
-    public function getNompag()
-    {
-        return $this->nompag;
+    public function getNompag(){
+        return $this -> nompag;
     }
-
-    public function getRutpag()
-    {
-        return $this->rutpag;
+    public function getRutpag(){
+        return $this -> rutpag;
     }
-
-    public function getOrdpag()
-    {
-        return $this->ordpag;
+    public function getIcopag(){
+        return $this -> icopag;
     }
-
-
-    //Set Methods
-    public function setNompag($nompag)
-    {
-        $this->nompag = $nompag;
+    public function getOrdpag(){
+        return $this -> ordpag;
     }
-
-    public function setIdpag($idpag)
-    {
-        $this->idpag = $idpag;
+    //Metodos set 
+    public function setIdpag($idpag){
+        $this -> idpag =  $idpag;
     }
-
-    public function setRutpag($rutpag)
-    {
-        $this->rutpag = $rutpag;
+    public function setNompag($nompag){
+        $this -> nompag =  $nompag;
     }
- 
-    public function setOrdpag($ordpag)
-    {
-        $this->ordpag = $ordpag;
+    public function setRutpag($rutpag){
+        $this -> rutpag =  $rutpag;
     }
-
+    public function setIcopag($icopag){
+        $this -> icopag =  $icopag;
+    }
+    public function setOrdpag($ordpag){
+        $this -> ordpag = $ordpag;
+    }
+    
+    //Metodos publicos
     public function getAll(){
         $res = NULL;
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
-        $sql = "SELECT idpag, nompag, rutpag, ordpag FROM pagina";
-        $result = $conexion->prepare($sql);
+		$sql = "SELECT * FROM pagina";
+		$modelo = new Conexion();
+		$conexion = $modelo->get_conexion();    
+		$result = $conexion->prepare($sql);
+		$result->execute();
+		$res= $result->fetchall(PDO::FETCH_ASSOC);
+		return $res;
+    }
+    public function getOne(){
+        $res = NULL;
+        $sql = "SELECT * FROM pagina WHERE idpag=:idpag";
+        $modelo = new conexion();
+        $conexion = $modelo -> get_conexion();
+        $result = $conexion -> prepare($sql);
+        $idpag = $this-> getIdpag();
+        $result->bindParam(":idpag",$idpag);
         $result->execute();
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
-
-    public function getOne($idpag){
-        $res = NULL;
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
-        $sql = "SELECT idpag, nompag, rutpag, ordpag FROM pagina WHERE idpag=:idpag";
-        $result = $conexion->prepare($sql);
-        $result->bindParam(":idpag",$idpag);
-        $result->execute();
-        $res = $result->fetch(PDO::FETCH_ASSOC);
-        return $res;
-    }
-
     public function save(){
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
-        $sql = "INSERT INTO pagina(nompag, rutpag, ordpag) VALUES (:nompag, :rutpag, :ordpag)";
-        $result = $conexion->prepare($sql);
-        $nompag = $this->getNompag();
+        $sql = "INSERT INTO pagina (idpag, nompag, rutpag, ordpag, icopag) VALUES (:idpag, :nompag, :rutpag,  :ordpag, :icopag )";
+        $modelo = new conexion();
+        $conexion = $modelo -> get_conexion();
+        $result = $conexion -> prepare($sql);
+        $idpag = $this-> getIdpag();
+        $result->bindParam(":idpag",$idpag);
+        $nompag = $this-> getNompag();
         $result->bindParam(":nompag",$nompag);
-        $rutpag = $this->getRutpag();
+        $rutpag = $this-> getRutpag();
         $result->bindParam(":rutpag",$rutpag);
-        $ordpag = $this->getOrdpag();
+        $ordpag = $this-> getOrdpag();
+        $result->bindParam(":ordpag",$ordpag);
+        $icopag = $this-> getIcopag();
+        $result->bindParam(":icopag",$icopag);
+        $result->execute();
+    }
+    
+    public function edit(){
+        $sql = "UPDATE pagina SET idpag=:idpag, nompag=:nompag, rutpag=:rutpag, ordpag=:ordpag, icopag=:icopag WHERE idpag=:idpag";
+        $modelo = new conexion();
+        $conexion = $modelo -> get_conexion();
+        $result = $conexion -> prepare($sql);
+        $idpag = $this-> getIdpag();
+        $result->bindParam(":idpag",$idpag);
+        $nompag = $this-> getNompag();
+        $result->bindParam(":nompag",$nompag);
+        $rutpag = $this-> getRutpag();
+        $result->bindParam(":rutpag",$rutpag);
+        $icopag = $this-> getIcopag();
+        $result->bindParam(":icopag",$icopag);
+        $ordpag = $this-> getOrdpag();
         $result->bindParam(":ordpag",$ordpag);
         $result->execute();
     }
-
-    public function edit($idpag){
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
-        $sql = "UPDATE pagina SET nompag=:nompag,rutpag=:rutpag,ordpag=:ordpag WHERE idpag=:idpag";
-        $result = $conexion->prepare($sql);
-        $result->bindParam(":idpag",$idpag);
-        $result->execute();
-    }
-
-    public function delete($idpag){
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
+    public function del(){
         $sql = "DELETE FROM pagina WHERE idpag=:idpag";
-        $result = $conexion->prepare($sql);
+        $modelo = new conexion();
+        $conexion = $modelo -> get_conexion();
+        $result = $conexion -> prepare($sql);
+        $idpag = $this-> getIdpag();
         $result->bindParam(":idpag",$idpag);
         $result->execute();
     }
-}
+    
+ }
+?>

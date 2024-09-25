@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Accountly - Login</title>
     <title>SenaCycle</title>
 </head>
@@ -79,7 +80,7 @@
             $('#tables').DataTable({
                 "paging": true, // Habilita paginación
                 "searching": true, // Habilita el buscador
-                "ordering": false, // Habilita ordenación de columnas
+                "ordering": true, // Habilita ordenación de columnas
                 "pageLength": 10, // Muestra 5 filas por página
                 "lengthMenu": [5, 10, 20, 50] // Opciones para cambiar el número de filas
             }); // Inicializa DataTables
