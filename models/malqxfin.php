@@ -1,6 +1,7 @@
 <?php
 class Malqxfin
 {
+    //Propiedades de la clase 'alquiler por finanza'
     private $idfin;
     private $idalq;
 
@@ -24,6 +25,7 @@ class Malqxfin
         $this->idfin = $idfin;
     }
 
+    // Función que retorna todos los datos guardados en la tabla de 'alqxfin' (aqluoler por finanza)
     public function getAll()
     {
         $res = NULL;
@@ -35,7 +37,8 @@ class Malqxfin
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
-
+    
+    // Función que retorna un dato guardado en la tabla de 'alqxfin' (aqluoler por finanza)
     public function getOne($idfin, $idalq)
     {
         $res = NULL;
@@ -50,6 +53,7 @@ class Malqxfin
         return $res;
     }
 
+    // Función que guarda un dato en la tabla de 'alqxfin' (aqluoler por finanza)
     public function save()
     {
         $modelo = new Conexion();
@@ -65,6 +69,7 @@ class Malqxfin
         $result->execute();
     }
 
+    // Función que edita un dato en la tabla de 'alqxfin' (aqluoler por finanza)
     public function edit($idfin, $idalq)
     {
         $modelo = new Conexion();
@@ -76,6 +81,7 @@ class Malqxfin
         $result->execute();
     }
 
+    // Función que elimina un dato en la tabla de 'alqxfin' (aqluoler por finanza)
     public function delete($idfin, $idalq)
     {
         $modelo = new Conexion();
