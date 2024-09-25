@@ -14,19 +14,19 @@
             <table>
                 <tr>
                     <th>ID:</th>
-                    <td>123</td>
+                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['idbic']; ?></td>
                 </tr>
                 <tr>
                     <th>Marca:</th>
-                    <td>GW</td>
+                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['marca']; ?></td>
                 </tr>
                 <tr>
                     <th>Serial:</th>
-                    <td>38r9yu94yf2</td>
+                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['seriall']; ?></td>
                 </tr>
                 <tr>
                     <th>Color:</th>
-                    <td>Rojo</td>
+                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['color']; ?></td>
                 </tr>
             </table>
             <table>
@@ -41,10 +41,6 @@
                 <tr>
                     <th>Fecha Alquiler:</th>
                     <td>03/09/24</td>
-                </tr>
-                <tr>
-                    <th>Color:</th>
-                    <td>Rojo</td>
                 </tr>
             </table>
         </div>

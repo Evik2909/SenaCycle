@@ -15,7 +15,7 @@ title("monitoring", "Finanzas", 0, "person_add", "opbtn", "Crear Perfil");
       labels: ['Marzo', 'Abril', 'Junio', 'Julio', 'Agosto','Septiembre'],
       datasets: [{
         label: 'Ingresos totales por Mes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: [7, 13, 10, 12, 15, 9],
         borderWidth: 1
       }]
     },

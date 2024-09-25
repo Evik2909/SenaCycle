@@ -1,5 +1,5 @@
 <?php
-include("controllers/cper.php");
+include("controllers/cbic.php");
 title("pedal_bike", "Bicicletas", 1, "add", "opbtn", "Crear");
 ?>
 <div class="insert-form <?php if ($ope == "edi") echo "open-form"; ?>" id="vform">
@@ -7,7 +7,7 @@ title("pedal_bike", "Bicicletas", 1, "add", "opbtn", "Crear");
         <div class="row">
             <div class="form-group col-md-3">
                 <label for="serial">Serial</label>
-                <input type="text" class="form-control form-control" placeholder="Escribe el serial" name="serial" id="serial" value="<?php if ($dtOne) echo $dtOne[0]['serial']; ?>" required>
+                <input type="text" class="form-control form-control" placeholder="Escribe el serial" name="seriall" id="seriall" value="<?php if ($dtOne) echo $dtOne[0]['serial']; ?>" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="marca">Marca</label>
@@ -21,11 +21,11 @@ title("pedal_bike", "Bicicletas", 1, "add", "opbtn", "Crear");
                 <label for="idsed">Sede</label>
                 <select class="form-select" name="idsed" id="idsed">
                     <?php
-                    if ($pag) {
-                        foreach ($pag as $dp) {
+                    if ($dtSed) {
+                        foreach ($dtSed as $dp) {
                     ?>
-                            <option value="<?= $dp['idpag']; ?>" <?php if ($pag && $pagini == $dp['idpag']) echo " selected "; ?>>
-                                <?= $dp['idpag']; ?> - <?= $dp['nompag']; ?>
+                            <option value="<?= $dp['idsed']; ?>" <?php if ($dtSed && $idsed == $dp['idsed']) echo " selected "; ?>>
+                                <?= $dp['idsed']; ?> - <?= $dp['nomsed']; ?>
                             </option>
                     <?php
                         }
@@ -35,7 +35,7 @@ title("pedal_bike", "Bicicletas", 1, "add", "opbtn", "Crear");
             </div>
             <div class="form-group col-md-4">
                 <br>
-                <input type="hidden" name="ope" value="guardar">
+                <input type="hidden" name="ope" value="save">
                 <input type="submit" class="btn btn-color" value="Crear">
                 <a href="home.php?pg=<?= $m['idpag']; ?>" class="btn btn-danger">Cancelar</a>
             </div>
@@ -44,29 +44,30 @@ title("pedal_bike", "Bicicletas", 1, "add", "opbtn", "Crear");
 </div>
 <div class="cycles-container">
     <?php
-        for($i=0;$i<=30;$i++){
+    if ($dtBic) {
+        foreach($dtBic as $dt){
     ?>
-    <a class="cycle-item">
+    <a href="home.php?pg=<?= $m['idpag']; ?><?php if($dt['estbic']==2)echo"&mdl=1&idbic=".$dt['idbic'];?>" class="cycle-item <?php if($dt['estbic']==1)echo "cycle-active";else echo "cycle-inactive"; ?>">
         <img class="cycle-item-img" src="img/cycleicon.png" alt="Bicicleta">
         <div class="cycle-info">
             <table>
                 <tr>
                     <th>ID:</th>
-                    <td>123</td>
+                    <td><?= $dt['idbic']?></td>
                 </tr>
                 <tr>
                     <th>Marca:</th>
-                    <td>GW</td>
+                    <td><?= $dt['marca']?></td>
                 </tr>
                 <tr>
                     <th>Color:</th>
-                    <td>Rojo</td>
+                    <td><?= $dt['color']?></td>
                 </tr>
             </table>
         </div>
     </a>
     <?php      
-       }
+       }}
     ?>
 </div>
 <?php

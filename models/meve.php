@@ -76,11 +76,11 @@ class Meve
         $res = NULL;
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "SELECT ideve, nomeve, deseve, feceve, idusu FROM evento";
+        $sql = "SELECT ideve, nomeve, deseve, feceve, idusu FROM evento WHERE ideve=:ideve";
         $result = $conexion->prepare($sql);
         $result->bindParam(":ideve", $ideve);
         $result->execute();
-        $res = $result->fetch(PDO::FETCH_ASSOC);
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
 

@@ -390,6 +390,12 @@ div.account-container:hover{
     scale: 1.02;
     cursor: pointer;
 }
+.cycle-active{
+    background-color: #79ff894b;
+}
+.cycle-inactive{
+    background-color: #ff79799d;
+}
 .cycle-item .cycle-item-img{
     height: 100%;
 }

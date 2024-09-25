@@ -88,7 +88,7 @@ class Mbic
         $result = $conexion->prepare($sql);
         $result->bindParam(":idbic", $idbic);
         $result->execute();
-        $res = $result->fetch(PDO::FETCH_ASSOC);
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
 
@@ -142,5 +142,17 @@ class Mbic
         $result = $conexion->prepare($sql);
         $result->bindParam(":idbic", $idbic);
         $result->execute();
+    }
+
+    public function getSede()
+    {
+        $res = NULL;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT idsed, nomsed, codubi FROM sede";
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
     }
 }

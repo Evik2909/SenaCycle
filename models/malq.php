@@ -77,7 +77,7 @@ class Malq
         $res = NULL;
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "SELECT idalq, idusu, idbic, dist, totalq, fecini, fecent FROM alquiler";
+        $sql = "SELECT idalq, idusu, idbic, totalq, fecini, fecent FROM alquiler";
         $result = $conexion->prepare($sql);
         $result->execute();
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -152,5 +152,28 @@ class Malq
         $result = $conexion->prepare($sql);
         $result->bindParam(":idalq", $idalq);
         $result->execute();
+    }
+    public function getBicicletas()
+    {
+        $res = NULL;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT idbic, seriall, marca, color, estbic, idsed FROM bicicleta WHERE estbic=1";
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    public function getBicInfo($idbic)
+    {
+        $res = NULL;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT idbic, seriall, marca, color, estbic, idsed FROM bicicleta WHERE idbic=:idbic";
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idbic", $idbic);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
     }
 }
