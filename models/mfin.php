@@ -1,6 +1,7 @@
 <?php
 class Mfin
 {
+    //Propiedades de la clase 'finanza'
     private $idfin;
     private $nummes;
     private $nommes;
@@ -53,6 +54,8 @@ class Mfin
     {
         $this->totfin = $totfin;
     }
+
+    //Funcion que retorna todas las finanzas guardadas en la tabla de 'finanza'
     public function getAll()
     {
         $res = NULL;
@@ -65,6 +68,7 @@ class Mfin
         return $res;
     }
 
+    //Funcion que retorna una finanza guardadas en la tabla de 'finanza'
     public function getOne($idfin)
     {
         $res = NULL;
@@ -78,6 +82,7 @@ class Mfin
         return $res;
     }
 
+    //Funcion que guarda una finanza guardadas en la tabla de 'finanza'
     public function save()
     {
         $modelo = new Conexion();
@@ -95,6 +100,7 @@ class Mfin
         $result->execute();
     }
 
+    //Funcion que edita una finanza guardadas en la tabla de 'finanza'
     public function edit($idfin)
     {
         $modelo = new Conexion();
@@ -113,6 +119,7 @@ class Mfin
         $result->execute();
     }
 
+    //Funcion que elimina una finanza guardadas en la tabla de 'finanza'
     public function delete($idfin)
     {
         $modelo = new Conexion();
