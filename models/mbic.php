@@ -1,7 +1,7 @@
 <?php
 class Mbic
 {
-    
+    //Propiedades de la clase 'bicicleta'
     private $idbic;
     private $seriall;
     private $marca;
@@ -65,7 +65,7 @@ class Mbic
         $this->idsed = $idsed;
     }
 
-     // Función que retorna todos las bicicletas registradas en el sistema.
+    // Función que retorna todos las bicicletas registradas en la tabla de 'bicicleta'
     public function getAll()
     {
         $res = NULL;
@@ -78,7 +78,7 @@ class Mbic
         return $res;
     }
 
-    
+    // Función que retorna una bicicleta registrada en la tabla de 'bicicleta'
     public function getOne($idbic)
     {
         $res = NULL;
@@ -92,6 +92,7 @@ class Mbic
         return $res;
     }
 
+    // Función que guarda una bicicleta registrada en la tabla de 'bicicleta'
     public function save()
     {
         $modelo = new Conexion();
@@ -111,6 +112,7 @@ class Mbic
         $result->execute();
     }
 
+     // Función que edita una bicicleta registrada en la tabla de 'bicicleta'
     public function edit($idbic)
     {
         $modelo = new Conexion();
@@ -131,6 +133,7 @@ class Mbic
         $result->execute();
     }
 
+     // Función que elimina una bicicleta registrada en la tabla de 'bicicleta'
     public function delete($idbic)
     {
         $modelo = new Conexion();
