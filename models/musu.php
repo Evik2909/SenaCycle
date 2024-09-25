@@ -1,7 +1,7 @@
 <?php
 class Musu
 {
-    
+    //Propiedades de la clase 'usuario'
     private $idusu;
     private $idper;
     private $nomusu;
@@ -113,6 +113,7 @@ class Musu
         $this->estusu = $estusu;
     }
 
+    //Funcion para obtener todos los usuarios registrados en la tabla de 'usuario'
     public function getAll()
     {
         $res = NULL;
@@ -125,6 +126,7 @@ class Musu
         return $res;
     }
 
+    //Funcion para obtener un usuario registrado en la tabla de 'usuario'
     public function getOne($idusu)
     {
         $res = NULL;
@@ -138,6 +140,7 @@ class Musu
         return $res;
     }
 
+    //Funcion para guardar todos los usuarios registrados en la tabla de 'usuario'
     public function save()
     {
         $modelo = new Conexion();
@@ -165,6 +168,7 @@ class Musu
         $result->execute();
     }
 
+    //Funcion para editar todos los usuarios registrados en la tabla de 'usuario'
     public function edit($idusu)
     {
         $modelo = new Conexion();
@@ -192,7 +196,8 @@ class Musu
         $result->bindParam(":idsed", $idsed);
         $result->execute();
     }
-
+    
+    //Funcion para eliminar todos los usuarios registrados en la tabla de 'usuario'
     public function delete($idusu)
     {
         $modelo = new Conexion();
