@@ -1,6 +1,7 @@
 <?php
 class Malq
 {
+    //Propiedades de la clase 'alquiler'
     private $idalq;
     private $idusu;
     private $idbic;
@@ -70,7 +71,7 @@ class Malq
         $this->fecent = $fecent;
     }
 
-    // Función que retorna todos los alquilires registrados en el sistema.
+    // Función que retorna todos los alquileres registrados en el sistema.
     public function getAll()
     {
         $res = NULL;
