@@ -1,7 +1,7 @@
 <?php
 class Meve
 {
-
+    //Propiedades de la clase 'evento'
     private $ideve;
     private $nomeve;
     private $deseve;
@@ -57,6 +57,7 @@ class Meve
         $this->idusu = $idusu;
     }
 
+    //Funcion que retorna todos los eventos registrados en la tabla de 'evento'
     public function getAll()
     {
         $res = NULL;
@@ -69,6 +70,7 @@ class Meve
         return $res;
     }
 
+    //Funcion que retorna un evento registrado en la tabla de 'evento'
     public function getOne($ideve)
     {
         $res = NULL;
@@ -82,6 +84,7 @@ class Meve
         return $res;
     }
 
+    //Funcion que guarda un evento registrado en la tabla de 'evento'
     public function save()
     {
         $modelo = new Conexion();
@@ -99,6 +102,7 @@ class Meve
         $result->execute();
     }
 
+    //Funcion que ediat un evento registrado en la tabla de 'evento'
     public function edit($ideve)
     {
         $modelo = new Conexion();
@@ -116,6 +120,7 @@ class Meve
         $result->execute();
     }
 
+    //Funcion que elimina un evento registrado en la tabla de 'evento'
     public function delete($ideve)
     {
         $modelo = new Conexion();
