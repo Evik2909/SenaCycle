@@ -39,8 +39,8 @@
                     <td>12345678</td>
                 </tr>
                 <tr>
-                    <th>Serial:</th>
-                    <td>38r9yu94yf2</td>
+                    <th>Fecha Alquiler:</th>
+                    <td>03/09/24</td>
                 </tr>
                 <tr>
                     <th>Color:</th>
