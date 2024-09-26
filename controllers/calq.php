@@ -1,34 +1,34 @@
 <?php
 include "models/malq.php";
-
-
-
-
 //Se almacenan los datos
-$idalq = isset($_POST['idalq']) ? $_POST['idalq'] : null;
-$idusu = isset($_GET['idusu']) ? $_GET['idusu'] : null;
+$idalq = isset($_REQUEST['idalq']) ? $_REQUEST['idalq'] : null;
+$idusu = $_SESSION['idusu'];
 $idbic = isset($_GET['idbic']) ? $_GET['idbic'] : null;
-$dist = isset($_POST['dist']) ? $_POST['dist'] : null;
-$totalq = isset($_POST['totalq']) ? $_POST['totalq'] : null;
-$fecini = isset($_POST['fecini']) ? $_POST['fecini'] : null;
+$totalq = isset($_REQUEST['totalq']) ? $_REQUEST['totalq'] : null;
+$fecini = date('Y-m-d H:i:s');
 $fecent = isset($_POST['fecent']) ? $_POST['fecent'] : null;
 // Se define y/o llena la variable de ope para saber que operacion se va a realizar en la tabla de 'alquiler'
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : null;
 
 //Instanciar el modelo:
 $malq = new Malq();
-$malq->setIdalq($idalq);
 if ($ope == "save") {
     //Se envian todos los datos al modelo 'malq'
     $malq->setIdusu($idusu);
     $malq->setIdbic($idbic);
-    $malq->setDist($dist);
-    $malq->setTotalq($totalq);
     $malq->setFecini($fecini);
-    $malq->setFecent($fecent);
     //Se ejecuta la consulta en la base de datos
-    if($idalq)$malq->edit($idalq);
-    else $malq->save();
+    $malq->save();
+    $ope=null;
+}
+if ($ope == "finalq") {
+    //Se envian todos los datos al modelo 'malq'
+    $malq->setIdalq($idalq);
+    $malq->setIdbic($idbic);
+    $malq->setTotalq($totalq);
+    //Se ejecuta la consulta en la base de datos
+    $malq->updateAlq($idalq);
+    
 }
 //if ($ope=="del" && $id)$mpag->del();
 if ($ope=="edi" && $idbic || $mdl="alq" && $idbic){
@@ -36,6 +36,18 @@ if ($ope=="edi" && $idbic || $mdl="alq" && $idbic){
 }else{ 
     $dtOne=NULL;
 }; 
+if($malq->verifyAlq($_SESSION['idusu'])){
+    $actAlq = $malq->verifyAlq($_SESSION['idusu']); 
+}else{
+    $actAlq=null;
+}
 // Obtener todos los datos de los alquileres y guardalos en una variable
 $dtAlq = $malq->getAll();
 $dtBic = $malq->getBicicletas();
+$dtPrc = $malq->getPrecio(); 
+//$actAlq = $malq->verifyAlq($_SESSION['idusu']);
+if($malq->infoAlq($_SESSION['idusu'])){
+    $inAl = $malq->infoAlq($_SESSION['idusu']);
+}else{
+    $inAl=null;
+}

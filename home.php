@@ -22,6 +22,10 @@
     <title>SenaCycle</title>
 </head>
 <body>
+    <?php
+    error_reporting(0); // Desactiva la notificación de errores
+    ini_set('display_errors', 0); // Evita que se muestren los errores
+    ?>
     <script>
         function drop(){
             if (confirm("¿Estás seguro de que deseas eliminar este elemento?")) {

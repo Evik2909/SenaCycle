@@ -5,25 +5,29 @@
             <table>
                 <tr>
                     <th class="px-2">ID:</th>
-                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['idbic']; ?></td>
+                    <td><?=$dtOne[0]['idbic']; ?></td>
                 </tr>
                 <tr>
                     <th class="px-2">Marca:</th>
-                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['marca']; ?></td>
+                    <td><?=$dtOne[0]['marca']; ?></td>
                 </tr>
                 <tr>
                     <th class="px-2">Serial:</th>
-                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['seriall']; ?></td>
+                    <td><?=$dtOne[0]['seriall']; ?></td>
                 </tr>
                 <tr>
                     <th class="px-2">Color:</th>
-                    <td><?php if ($dtOne && $dtOne[0]['idbic']) echo $dtOne[0]['color']; ?></td>
+                    <td><?=$dtOne[0]['color']; ?></td>
+                </tr>
+                <tr>
+                    <th class="px-2">Precio/hora:</th>
+                    <td><?=$dtPrc[0]['nomval']; ?></td>
                 </tr>
             </table>
         </div>
         <div class="d-flex justify-content-center gap-3">
         <a href="home.php?pg=<?= $m['idpag']; ?>" class="btn btn-danger">Cancelar</a>
-        <button class="btn btn-color">Si, Alquilar</button>
+        <a href="home.php?pg=<?= $m['idpag']; ?>&alq=1&idbic=<?=$dtOne[0]['idbic'];?>&ope=save"  class="btn btn-color">Si, Alquilar</a>
         </div>
     </div>
 </div>

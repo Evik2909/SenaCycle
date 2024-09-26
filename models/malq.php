@@ -103,20 +103,14 @@ class Malq
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "INSERT INTO alquiler(idusu, idbic, dist, totalq, fecini, fecent) VALUES (:idusu, :idbic, :dist, :totalq, :fecini, :fecent)";
+        $sql = "INSERT INTO alquiler(idusu, idbic, fecini) VALUES (:idusu, :idbic, :fecini)";
         $result = $conexion->prepare($sql);
         $idusu = $this->getIdusu();
         $result->bindParam(":idusu", $idusu);
         $idbic = $this->getIdbic();
         $result->bindParam(":idbic", $idbic);
-        $dist = $this->getDist();
-        $result->bindParam(":dist", $dist);
-        $totalq = $this->getTotalq();
-        $result->bindParam(":totalq", $totalq);
         $fecini = $this->getFecini();
         $result->bindParam(":fecini", $fecini);
-        $fecent = $this->getFecent();
-        $result->bindParam(":fecent", $fecent);
         $result->execute();
     }
 
@@ -148,7 +142,7 @@ class Malq
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "DELETE FROM alquuiler WHERE idalq=:idalq";
+        $sql = "DELETE FROM alquiler WHERE idalq=:idalq";
         $result = $conexion->prepare($sql);
         $result->bindParam(":idalq", $idalq);
         $result->execute();
@@ -176,4 +170,60 @@ class Malq
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
+    public function getPrecio(){
+        $res = NULL;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT v.idval, v.nomval, v.parval FROM valor AS v WHERE v.iddom=2;";
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    public function verifyAlq($idusu){
+        $res = NULL;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT idalq, estalq FROM alquiler WHERE idusu=:idusu AND estalq=1;";
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idusu", $idusu);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    public function infoAlq($idusu){
+        $res = NULL;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT
+                a.idalq, a.idusu, a.idbic, a.totalq, a.fecini, a.fecent, a.estalq,a.tarini, a.prehor, 
+                b.seriall, b.marca, b.color, 
+                vt.nomval AS tin, vt.parval AS tiv,
+                vp.nomval AS phn, vp.parval AS phv,
+                es.parval AS dsc,
+                us.idusu, us.estsoc
+                FROM alquiler AS a 
+                INNER JOIN usuario AS us ON a.idusu=us.idusu
+                INNER JOIN bicicleta AS b ON a.idbic=b.idbic 
+                INNER JOIN valor AS vt ON a.tarini=vt.idval
+                INNER JOIN valor AS vp ON a.prehor=vp.idval
+                INNER JOIN valor AS es ON us.estsoc=es.idval
+                WHERE a.idusu=:idusu AND a.estalq=1";
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idusu", $idusu);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    public function updateAlq($idalq)
+    {
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "UPDATE alquiler SET estalq=2 WHERE idalq=:idalq";
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idalq", $idalq);
+        $result->execute();
+    }
+
 }
