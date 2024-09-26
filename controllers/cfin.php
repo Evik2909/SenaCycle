@@ -18,7 +18,7 @@ $idfin = isset($_REQUEST['idfin']) ? $_REQUEST['idfin'] : null;
 $nummes = isset($_POST['nummes']) ? $_POST['nummes'] : null;
 $nommes = isset($_POST['nommes']) ? $_POST['nommes'] : null;
 $ano = isset($_POST['ano']) ? $_POST['ano'] : null;
-$totfin = isset($_POST['totfin']) ? $_POST['totfin'] : null;
+ 
 
 
 
@@ -32,6 +32,8 @@ if (!empty($idfin) && !empty($nummes) && !empty($nommes) && !empty($ano) && !emp
         $mfin->setNummes($nummes);
         $mfin->setNommes($nommes);
         $mfin->setAno($ano);
+
+        $totfin = $mfin->getTotalFinanzaPorMes($nummes,$ano);
         $mfin->setTotfin($totfin);
 
         //Se ejecuta la consulta en la base de datos
@@ -55,8 +57,6 @@ if (!empty($idfin) && !empty($nummes) && !empty($nommes) && !empty($ano) && !emp
     }
     //Se envian los datos
 
-} else {
-    echo "<script>alert('Algunos de los campos están vacíos. Por favor llene todos los campos')</script>";
 }
 
 // Obtener todos los datos de las finanzas y guardalos en una variable

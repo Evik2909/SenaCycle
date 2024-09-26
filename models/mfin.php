@@ -129,4 +129,17 @@ class Mfin
         $result->bindParam(":idfin", $idfin);
         $result->execute();
     }
+
+    public function getTotalFinanzaPorMes($nummes,$ano){
+        $res = null;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT f.totfin FROM finanza AS f JOIN alqxfin AS af ON f.idfin = af.idfin JOIN alquiler AS a ON af.idalq = a.idalq WHERE MONTH(a.fecini) = :nummes AND YEAR(a.fecent) = :ano;";
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":nummes",$nummes);
+        $result->bindParam(":ano",$ano);
+        $result->execute();
+        $res = $result->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
 }
