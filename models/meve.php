@@ -76,11 +76,11 @@ class Meve
         $res = NULL;
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "SELECT ideve, nomeve, deseve, feceve, idusu FROM evento WHERE ideve=:ideve";
+        $sql = "SELECT ideve, nomeve, deseve, feceve, idusu FROM evento";
         $result = $conexion->prepare($sql);
         $result->bindParam(":ideve", $ideve);
         $result->execute();
-        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        $res = $result->fetch(PDO::FETCH_ASSOC);
         return $res;
     }
 
@@ -129,5 +129,19 @@ class Meve
         $result = $conexion->prepare($sql);
         $result->bindParam(":ideve", $ideve);
         $result->execute();
+    }
+
+    //Funcion para traer todos los eventos a los cuales se ha inscrito un 'usuario'
+    public function getEventosxusuario($idusu)
+    {
+        $res = null;
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $sql = "SELECT u.nomusu, e.nomeve, e.deseve, e.feceve, ue.idusu, ue.ideve FROM usuario AS u INNER JOIN evento AS e ON u.idusu=e.idusu INNER JOIN usuxeve AS ue ON u.idusu=ue.idusu WHERE ue.idusu=:idusu";
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idusu", $idusu);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
     }
 }
